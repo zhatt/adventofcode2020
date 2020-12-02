@@ -59,3 +59,10 @@ func MainFunc(part1 partFunc, part2 partFunc) {
 	}
 	fmt.Println(result)
 }
+
+// PanicOnError - panic on error
+func PanicOnError(err error) {
+	if err != nil {
+		panic(err)
+	}
+}
