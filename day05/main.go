@@ -19,17 +19,20 @@ func seatID(locator string) int {
 	aoc.PanicOnError(err)
 
 	seatID := row*8 + col
+
 	return int(seatID)
 }
 
 func part1(inputList []string) string {
 	highestSeatID := 0
+
 	for _, locator := range inputList {
 		seatID := seatID(locator)
 		if seatID > highestSeatID {
 			highestSeatID = seatID
 		}
 	}
+
 	return strconv.Itoa(highestSeatID)
 }
 

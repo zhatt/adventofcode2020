@@ -1,9 +1,10 @@
+// Package main for AOC 2020 day 1
+//
 package main
 
 import (
 	"errors"
 	"strconv"
-
 	"zhatt/aoc2020/aoc"
 )
 

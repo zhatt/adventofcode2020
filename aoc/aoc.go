@@ -1,3 +1,5 @@
+// Package aoc implements part 1 and part 2 runner for AOC.
+//
 package aoc
 
 import (
@@ -5,6 +7,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 )
 
 type partFunc func(inputLines []string) string
@@ -16,12 +19,17 @@ func ReadInput(inputFile string) []string {
 	file := os.Stdin
 
 	if inputFile != "" {
-		var err error = nil
-		file, err = os.Open(inputFile)
-		defer file.Close()
+		var err error
+		file, err = os.Open(filepath.Clean(inputFile))
 		if err != nil {
 			panic(err)
 		}
+		defer func() {
+			err := file.Close()
+			if err != nil {
+				panic(err)
+			}
+		}()
 	}
 
 	scanner := bufio.NewScanner(file)
@@ -38,7 +46,7 @@ func ReadInput(inputFile string) []string {
 
 // MainFunc is implements standard Advent of Code main function.
 // It parses arguments and calls part1 or part2 function.
-func MainFunc(part1 partFunc, part2 partFunc) {
+func MainFunc(part1, part2 partFunc) {
 	var partOpt = 1
 	var inputFile = ""
 
@@ -60,7 +68,7 @@ func MainFunc(part1 partFunc, part2 partFunc) {
 	fmt.Println(result)
 }
 
-// PanicOnError - panic on error
+// PanicOnError - panic on error.
 func PanicOnError(err error) {
 	if err != nil {
 		panic(err)

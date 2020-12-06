@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
-
 	"zhatt/aoc2020/aoc"
 )
 

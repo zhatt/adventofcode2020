@@ -1,11 +1,11 @@
+// Package coord implements a coordinate abstraction.
 package coord
 
 import (
 	"math/big"
-	"math/bits"
 )
 
-// Coord data type
+// Coord data type.
 type Coord struct {
 	Xval int
 	Yval int
@@ -44,7 +44,7 @@ func Add(coords ...Coord) Coord {
 }
 
 // DistanceManhattan returns the distance between coords.
-func DistanceManhattan(coord1 Coord, coord2 Coord) int {
+func DistanceManhattan(coord1, coord2 Coord) int {
 	return abs(coord2.Xval-coord1.Xval) + abs(coord2.Yval-coord1.Yval)
 }
 
@@ -77,7 +77,7 @@ func MaxBound(coords []Coord) Coord {
 	return Coord{xmax, ymax}
 }
 
-// Slope of line
+// Slope of line.
 type Slope struct {
 	Rise int
 	Run  int
@@ -95,14 +95,9 @@ func (slope *Slope) Normalize() {
 	slope.Run = int(rat.Denom().Int64())
 }
 
-const maxInt = 1<<(bits.UintSize-1) - 1
-
 // SlopeNegy calculates the slope for coordinates where positive y goes down.
 func SlopeNegy(coord1, coord2 Coord) Slope {
-
 	if coord1.Xval == coord2.Xval {
-		// Infinite slope.
-		//return Slope{maxInt, 1}
 		return Slope{1, 0}
 	}
 
@@ -118,11 +113,10 @@ func SlopeNegy(coord1, coord2 Coord) Slope {
 // 0:  Same location
 // 1:  coord2 is right of coord1
 //     coord2 is directly above coord1
-// -1:  coord2 is left of coord1
+// -1:  coord2 is left of coord1.
 //      coord2 is directly below coord1
 //
 func RelationNegy(coord1, coord2 Coord) int {
-
 	if coord1 == coord2 {
 		return 0
 	}

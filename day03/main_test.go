@@ -2,9 +2,9 @@ package main
 
 import (
 	"testing"
-	"zhatt/aoc2020/coord"
 
 	"zhatt/aoc2020/aoc"
+	"zhatt/aoc2020/coord"
 
 	"github.com/stretchr/testify/assert"
 )

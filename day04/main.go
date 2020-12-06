@@ -1,3 +1,4 @@
+// AOC2200 Day 4
 package main
 
 import (
@@ -29,7 +30,7 @@ func parseInput(input []string) []passportData {
 	return data
 }
 
-func isValidYear(yearString string, min int, max int) bool {
+func isValidYear(yearString string, min, max int) bool {
 	year, err := strconv.ParseInt(yearString, 10, 0)
 
 	return err == nil && int(year) >= min && int(year) <= max
@@ -48,7 +49,6 @@ func isValidEyr(year string) bool {
 }
 
 func isValidHgt(heightString string) bool {
-
 	if len(heightString) < 2 {
 		return false
 	}
@@ -58,11 +58,10 @@ func isValidHgt(heightString string) bool {
 	if heightString[len(heightString)-2:] == "cm" {
 		return err == nil && int(height) >= 150 && int(height) <= 193
 	}
-	
+
 	if heightString[len(heightString)-2:] == "in" {
 		return err == nil && int(height) >= 59 && int(height) <= 76
-
-	} 
+	}
 	return false
 }
 
@@ -132,9 +131,9 @@ func countValidPasswords(passwordData []passportData, validate bool) int {
 						break
 					}
 				}
-
 			} else {
 				isGood = false
+
 				break
 			}
 		}

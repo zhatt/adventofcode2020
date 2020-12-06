@@ -1,3 +1,5 @@
+// Package main for AOC 2020 day 3.
+//
 package main
 
 import (
@@ -13,23 +15,23 @@ type mapData struct {
 }
 
 func newMapData() mapData {
-	mapData := mapData{}
-	mapData.isTree = make(map[coord.Coord]bool)
-	return mapData
+	data := mapData{}
+	data.isTree = make(map[coord.Coord]bool)
+	return data
 }
 
 func parseInput(input []string) mapData {
-	mapData := newMapData()
+	data := newMapData()
 	for y, line := range input {
-		mapData.mapWidth = len(line)
-		mapData.mapHeight = y + 1
+		data.mapWidth = len(line)
+		data.mapHeight = y + 1
 		for x, value := range line {
 			if value == '#' {
-				mapData.isTree[coord.Coord{Xval: x, Yval: y}] = true
+				data.isTree[coord.Coord{Xval: x, Yval: y}] = true
 			}
 		}
 	}
-	return mapData
+	return data
 }
 
 func simulatOneSledRun(mapData mapData, slope coord.Slope) int {
