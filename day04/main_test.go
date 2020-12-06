@@ -25,7 +25,6 @@ var exampleInput = []string{
 
 func TestParseInput(t *testing.T) {
 	passportData := parseInput(exampleInput)
-	_ = passportData
 
 	assert.Equal(t, 4, len(passportData))
 	assert.Equal(t, "350", passportData[1]["cid"])
