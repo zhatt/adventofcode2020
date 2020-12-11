@@ -8,18 +8,25 @@ import (
 	"zhatt/aoc2020/aoc"
 )
 
+type opcodeType string
+
+const (
+	opNop opcodeType = "nop"
+	opJmp opcodeType = "jmp"
+	opAcc opcodeType = "acc"
+)
+
 type instruction struct {
-	opcode  string
+	opcode  opcodeType
 	operand int
 }
 
 func parseInput(input []string) []instruction {
-	instructions := make([]instruction, len(input), len(input))
+	instructions := make([]instruction, len(input))
 
 	for index, line := range input {
-
 		fields := strings.Fields(line)
-		opcode := fields[0]
+		opcode := opcodeType(fields[0])
 		operand, err := strconv.Atoi(fields[1])
 		aoc.PanicOnError(err)
 
@@ -40,15 +47,15 @@ func simulate(instructions []instruction) (int, error) {
 		var nextAcc int
 		var nextPc int
 		switch instructions[pc].opcode {
-		case "nop":
+		case opNop:
 			nextPc = pc + 1
 			nextAcc = acc
 
-		case "acc":
+		case opAcc:
 			nextPc = pc + 1
 			nextAcc = acc + instructions[pc].operand
 
-		case "jmp":
+		case opJmp:
 			nextPc = pc + instructions[pc].operand
 			nextAcc = acc
 		default:
@@ -83,11 +90,10 @@ func part2(inputList []string) string {
 		instructionsCopy := make([]instruction, len(instructions))
 		copy(instructionsCopy, instructions)
 
-		if instructionsCopy[index].opcode == "nop" {
-			instructionsCopy[index].opcode = "jmp"
-
-		} else if instructionsCopy[index].opcode == "jmp" {
-			instructionsCopy[index].opcode = "nop"
+		if instructionsCopy[index].opcode == opNop {
+			instructionsCopy[index].opcode = opJmp
+		} else if instructionsCopy[index].opcode == opJmp {
+			instructionsCopy[index].opcode = opNop
 		}
 		finalAcc, err = simulate(instructionsCopy)
 		if err == nil {

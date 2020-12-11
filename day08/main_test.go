@@ -22,9 +22,9 @@ var exampleInput = []string{
 func TestParseInput(t *testing.T) {
 	instructions := parseInput(exampleInput)
 	assert.Equal(t, 9, len(instructions))
-	assert.Equal(t, "acc", instructions[3].opcode)
+	assert.Equal(t, opcodeType("acc"), instructions[3].opcode)
 	assert.Equal(t, 3, instructions[3].operand)
-	assert.Equal(t, "jmp", instructions[7].opcode)
+	assert.Equal(t, opcodeType("jmp"), instructions[7].opcode)
 	assert.Equal(t, -4, instructions[7].operand)
 }
 
