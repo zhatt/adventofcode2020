@@ -1,4 +1,4 @@
-// AOC2200 Day 4
+// AOC2200 Day 8
 package main
 
 import (

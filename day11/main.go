@@ -1,4 +1,4 @@
-// AOC2200 Day 10
+// AOC2200 Day 11
 package main
 
 import (
